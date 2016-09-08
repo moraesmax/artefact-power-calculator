@@ -1,0 +1,346 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Artefact Power Calculator</title>
+  <meta name="description" content="Calculate the artefact power of your artefact weapon">
+  <meta name="author" content="moraesmax">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css" />
+  <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  <style>
+    html,body {
+    width: 100%;
+    height: 100%;
+    display: block;
+    }
+#resultado {
+text-transform: uppercase;
+  width: 100%;
+  display: block;
+color: #fff;
+font-size: 18px;
+text-align: center;
+margin: 25px 0;
+}
+html {
+background-image: url(img/back.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+background-position: center;
+}
+body {
+  background-color: rgba(0,0,0,0.5);
+position: absolute;
+top: 0;
+}
+*{font-family: 'Metamorphous', cursive;}
+    #valor {
+box-sizing: border-box;
+text-align: center;
+padding: 15px 25px;
+width: 90%;
+max-width: 500px;
+margin: auto;
+display: block;
+border-radius: 5px;
+border: none;
+font-family: 'Metamorphous', cursive;
+margin-bottom: 50px;
+}
+#calcular{
+
+margin: auto;
+display: block;
+
+}
+
+.Button {
+  background: none;
+  border: none;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  height: 110px;
+  height: 5.5rem;
+  line-height: 24px;
+  line-height: 1.2rem;
+  padding: 0 120px;
+  padding: 0 6rem;
+  position: relative;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.Button--fixedWidth {
+  width: 140px;
+  width: 7rem;
+}
+
+.Button--subtle {
+  background: #0dc61d;
+  box-shadow: 0px 0px 10px #0dc61d;
+  color: #000;
+  font-weight: 700;
+  height: auto;
+  line-height: 24px;
+  line-height: 1.2rem;
+  padding: 12px 48px;
+  padding: 0.6rem 2.4rem;
+  text-shadow: 0px 0px 16px #deff00, 0px 0px 12px #deff00, 0px 0px 8px #deff00;
+  -webkit-transition: background 0.2s;
+  transition: background 0.2s;
+}
+
+.Button--subtle:hover {
+  background: #13ff29;
+}
+
+.Button--expanded {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 9px 5% 0;
+  margin: 0.46875rem 5% 0;
+  text-align: center;
+  width: 90%;
+}
+
+.Button--textGlow {
+  color: #13ff29;
+  font-size: 20px;
+  font-size: 1rem;
+  font-weight: 200;
+  height: auto;
+  line-height: 24px;
+  line-height: 1.2rem;
+  padding: 12px 24px;
+  padding: 0.6rem 1.2rem;
+  position: relative;
+  text-shadow: 0 0 80px #10d222, 0 0 60px rgba(16, 210, 34, 0.9), 0 0 40px rgba(16, 210, 34, 0.8), 0 0 20px rgba(16, 210, 34, 0.7);
+  -webkit-transition: color 0.2s, text-shadow 0.2s;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.Button--textGlow:hover {
+  color: #fff;
+  text-shadow: 0 0 80px #ffffff, 0 0 60px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.7);
+}
+
+.Button-left {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-left.png");
+}
+
+.Button-left,
+.Button-left:after {
+  background-size: 100% 100%;
+  height: 110px;
+  height: 5.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 138px;
+  width: 6.9rem;
+}
+
+.Button-left:after {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-left-hover.png");
+  content: "";
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.Button--locked > .Button-left {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-left-locked.png");
+}
+
+.Button-right {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-right.png");
+}
+
+.Button-right,
+.Button-right:after {
+  background-size: 100% 100%;
+  height: 110px;
+  height: 5.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 138px;
+  width: 6.9rem;
+}
+
+.Button-right:after {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-right-hover.png");
+  content: "";
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.Button--locked > .Button-right {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-right-locked.png");
+}
+
+.Button-middle {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-middle.png");
+  left: 138px;
+  left: 6.9rem;
+  right: 138px;
+  right: 6.9rem;
+}
+
+.Button-middle,
+.Button-middle:after {
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  bottom: 0;
+  position: absolute;
+  top: 0;
+}
+
+.Button-middle:after {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-middle-hover.png");
+  content: "";
+  left: 0;
+  opacity: 0;
+  right: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.Button--locked > .Button-middle {
+  background-image:url("http://us.battle.net/wow/static/images/seven-oh/button-middle-locked.png");
+}
+
+.Button-light {
+  top: -27px;
+  top: -1.35rem;
+}
+
+.Button-light,
+.Button-light:after {
+  background:url("http://us.battle.net/wow/static/images/seven-oh/button-light.png") no-repeat;
+  background-size: 100% 100%;
+  height: 150px;
+  height: 7.5rem;
+  position: absolute;
+  right: 0;
+  width: 199px;
+  width: 9.95rem;
+}
+
+.Button-light:after {
+  content: "";
+  opacity: 0;
+  top: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.Button--locked > .Button-light {
+  display: none;
+}
+
+.Button:hover > .Button-left:after,
+.Button:hover > .Button-right:after,
+.Button:hover > .Button-middle:after,
+.Button:hover > .Button-light:after {
+  opacity: 1;
+}
+
+.Button--locked {
+  cursor: default;
+}
+
+.Button--locked > .Button-left:after,
+.Button--locked > .Button-right:after,
+.Button--locked > .Button-middle:after,
+.Button--locked > .Button-light:after {
+  display: none;
+}
+
+.Button-text {
+  font-size: 24px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 110px;
+  line-height: 5.5rem;
+  position: relative;
+  text-align: center;
+  text-shadow: 0 0 10px #e6ff42, 0 0 10px #e6ff42;
+}
+
+.Button--locked > .Button-text {
+  text-shadow: 0 0 10px #95be8e, 0 0 10px #95be8e;
+}
+
+.Button--fixedWidth > .Button-text {
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.ButtonFootnote {
+  font-size: 15px;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.todo {
+  display: block;
+width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+  </style>
+</head>
+
+<body>
+<div class="todo">
+  <p id="resultado">Calculate how much artefact power you already spent</p>
+  <input id="valor" type="number" min="1" max="34" placeholder="Current level">
+  <a id="calcular" class="Button Button--fixedWidth" href="javascript:void(0)">
+						<div class="Button-left"></div>
+	<div class="Button-middle"></div>
+	<div class="Button-right"></div>
+	<div class="Button-light"></div>
+	<div class="Button-text" style="font-weight: bold">Calcular</div>
+
+				</a>
+</div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+    var values = [100,300,325,350,375,400,425,450,525,625,750,875,1000,6840,8830,11280,14400,18620,24000,30600,39520,50880,64800,82500,105280,138650,182780,240870,315520,417650,546000,718200,946660,1245840];
+    $("#calcular").click(function() {
+      var level = $("#valor").val();
+      if(level === "") {
+        $("#resultado").html("Level cant be empty");
+      } else {
+        level = parseInt(level);
+        if(level < 1 || level > 34) {
+	  $("#resultado").html("invalid level");
+        } else {
+          var total = 0;
+    	  for(var x = 0; x < level; x++) {
+	    total += values[x];
+  	  }
+          $("#resultado").html(total.toLocaleString('en-US', {minimumFractionDigits: 0}));
+        }
+      }
+    });
+  </script>
+  </body>
+</html>
